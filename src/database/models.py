@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, Boolean
+from datetime import datetime
+
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DATETIME
 from sqlalchemy.orm import relationship
 
 from db import Base
@@ -32,7 +34,7 @@ class Invoice(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     subscription_id = Column(Integer, ForeignKey('subscriptions.id'))
-    date = Column(Date)
+    date = Column(DATETIME, default=datetime.now)
     price = Column(Integer)
     is_active = Column(Boolean, default=False)
 
