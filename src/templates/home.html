@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Cloud</title>
+		<!-- Add Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{ url_for('statics', path='style.css') }}">
+	</head>
+	<body>
+		<div class="container">
+			<div class="center-div row justify-content-center align-items-center">
+				<div class="col-md-6 text-center">
+					<img src="{{ url_for('statics', path='cloud.jpg') }}" alt="Image" class="img-fluid img-resize">
+				</div>
+	<!--			TODO: fix button onclick and link href-->
+				<div class="col-md-6 text-center">
+					<button class="btn btn-primary mt-3" onclick="window.location.href='#'">sign up</button>
+					<p><a href="#" class="link-primary mt-3">Already have an account? sign in</a></p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Add Bootstrap JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
