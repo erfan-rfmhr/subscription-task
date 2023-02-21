@@ -16,7 +16,7 @@ class Customer(Base):
     subscriptions = relationship('Subscriptions', back_populates='owners', secondary='invoices')
 
     def __repr__(self):
-        return f'Customer(id={self.id}, username={self.username}, email={self.email}), credit={self.credit}
+        return f'Customer(id={self.id}, username={self.username}, email={self.email}), credit={self.credit}'
 
 
 class Subscription(Base):
