@@ -11,6 +11,7 @@ class Customer(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
+    credit = Column(Integer, default=0)
     password = Column(String)
     subscriptions = relationship('Subscriptions', back_populates='owners', secondary='invoices')
 
