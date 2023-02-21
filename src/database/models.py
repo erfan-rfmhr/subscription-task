@@ -35,10 +35,9 @@ class Invoice(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     customer_id = Column(Integer, ForeignKey('customers.id'))
     subscription_id = Column(Integer, ForeignKey('subscriptions.id'))
-    date = Column(DATETIME, default=datetime.now)
-    price = Column(Integer)
+    start_date = Column(DATETIME, default=datetime.now)
     is_active = Column(Boolean, default=False)
 
     def __repr__(self):
         return f'Invoice(id={self.id}, customer_id={self.customer_id}, subscription_id={self.subscription_id},\
-        date={self.date}, price={self.price}, is_active={self.is_active})'
+        start date={self.start_date}, is_active={self.is_active})'
