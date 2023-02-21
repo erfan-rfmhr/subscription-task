@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DATETIME
 from sqlalchemy.orm import relationship
 
-from db import Base
+from src.database.db import Base
 
 
 class Customer(Base):
@@ -13,7 +13,7 @@ class Customer(Base):
     email = Column(String, unique=True, index=True)
     credit = Column(Integer, default=0)
     password = Column(String)
-    subscriptions = relationship('Subscriptions', back_populates='owners', secondary='invoices')
+    subscriptions = relationship('Subscription', back_populates='owners', secondary='invoices')
 
     def __repr__(self):
         return f'Customer(id={self.id}, username={self.username}, email={self.email}), credit={self.credit}'
