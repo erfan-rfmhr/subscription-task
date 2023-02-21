@@ -1,0 +1,8 @@
+.img-resize {
+    max-width: 70%; /* set the max-width as needed */
+}
+.center-div {
+    margin: auto;
+    max-width: 600px; /* set the max-width as needed */
+    text-align: center;
+}
