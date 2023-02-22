@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse
+from authentication.auth import login_manager
+from database.db_user import add_user
+from fastapi import APIRouter, Request, Form, status, Depends
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
-
-from src.database.db_user import add_user
 
 router = APIRouter(prefix="/user", tags=["user"])
 user_templates = Jinja2Templates(directory="templates/user")
@@ -15,5 +15,16 @@ async def signup(request: Request):
 
 @router.post("/signup")
 async def signup(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
-    user = add_user(username, email, password)
-    return {"username": username, "email": email, "password": password}
+    await add_user(username, email, password)
+    access_token = login_manager.create_access_token(
+        data={"sub": username}
+    )
+    response = RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
+    login_manager.set_cookie(response=response, token=access_token)
+    return response
+
+
+@router.get("/account", response_class=HTMLResponse)
+async def account(request: Request, user=Depends(login_manager)):
+    print(user.username)
+    # return user_templates.TemplateResponse("account.html", {"request": request, "user": user})
