@@ -1,5 +1,5 @@
 from database.db import db_admin
-from database.models import Customer
+from database.models import Customer, Invoice
 from authentication.auth import login_manager
 
 
@@ -28,3 +28,21 @@ async def get_user_invoices(user_id: int):
         statement="SELECT subscription_id, is_active FROM invoices WHERE customer_id = :user_id",
         params={"user_id": user_id})
     return cursor.fetchall()
+
+
+async def user_has_already_bought_this_subscription(user_id: int, subscription_id: int) -> bool:
+    cursor = await db_admin.db.async_execute(
+        statement="SELECT * FROM invoices WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+    invoice = cursor.fetchone()
+    if invoice is not None:
+        return True
+    return False
+
+
+async def buy_subscription(user_id: int, subscription_id: int):
+    # create invoice
+    invoice = Invoice(customer_id=user_id, subscription_id=subscription_id)
+    db_admin.db.add(invoice)
+    await db_admin.db.commit()
+    await db_admin.db.refresh(invoice)
