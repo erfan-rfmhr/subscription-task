@@ -13,3 +13,10 @@ async def create_subscriptions():
         await db_admin.db.refresh(sub1)
         await db_admin.db.refresh(sub2)
         await db_admin.db.refresh(sub3)
+
+
+async def get_subscription_price(subscription_id: int):
+    cursor = await db_admin.db.execute(
+        statement="SELECT price FROM subscriptions WHERE id = :subscription_id",
+        params={"subscription_id": subscription_id})
+    return cursor.fetchone()[0]
