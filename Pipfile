@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+aiomysql = "*"
+fastapi-scheduler = "*"
+jinja2 = "*"
+sqlalchemy = "*"
+pydantic = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+pip = "*"
+install = "*"
+fastapi-amis-admin = "*"
+aiosqlite = "*"
+python-dotenv = "*"
+fastapi-login = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
