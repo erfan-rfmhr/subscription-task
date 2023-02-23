@@ -1,6 +1,6 @@
+from authentication.auth import login_manager
 from database.db import db_admin
 from database.models import Customer, Invoice
-from authentication.auth import login_manager
 
 
 async def add_user(username, password):
@@ -46,3 +46,31 @@ async def buy_subscription(user_id: int, subscription_id: int):
     db_admin.db.add(invoice)
     await db_admin.db.commit()
     await db_admin.db.refresh(invoice)
+
+
+async def activate_subscription(user_id: int, subscription_id: int):
+    # activate invoice
+    cursor = await db_admin.db.async_execute(
+        statement="UPDATE invoices SET is_active = 1 WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+
+    cursor = await db_admin.db.async_execute(
+        statement="SELECT * FROM invoices WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+    invoice = cursor.fetchone()
+    await db_admin.db.commit()
+    return invoice
+
+
+async def deactivate_subscription(user_id: int, subscription_id: int):
+    # deactivate invoice
+    cursor = await db_admin.db.async_execute(
+        statement="UPDATE invoices SET is_active = 0 WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+
+    cursor = await db_admin.db.async_execute(
+        statement="SELECT * FROM invoices WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+    invoice = cursor.fetchone()
+    await db_admin.db.commit()
+    return invoice
