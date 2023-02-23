@@ -1,7 +1,7 @@
 from authentication.auth import login_manager
 from database.db import db_admin
 from database.db_user import add_user, get_user, get_user_invoices, user_has_already_bought_this_subscription, \
-    buy_subscription
+    buy_subscription, activate_subscription, deactivate_subscription
 from database.models import Customer, Subscription, Invoice
 from fastapi import APIRouter, Request, Form, status, Depends, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -74,4 +74,21 @@ async def account(request: Request, user=Depends(login_manager)):
 async def buy(request: Request, user=Depends(login_manager), subscription_id: int = Query(...)):
     if not await user_has_already_bought_this_subscription(user.id, subscription_id):
         await buy_subscription(user.id, subscription_id)
+    return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
+
+
+@router.get('/activate')
+async def activate(request: Request, user=Depends(login_manager), subscription_id: int = Query(...)):
+    invoice = None
+    if await user_has_already_bought_this_subscription(user.id, subscription_id):
+        invoice = await activate_subscription(user.id, subscription_id)
+    return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
+
+
+@router.get('/deactivate')
+async def deactivate(request: Request, user=Depends(login_manager), subscription_id: int = Query(...)):
+    invoice = None
+    if await user_has_already_bought_this_subscription(user.id, subscription_id):
+        invoice = await deactivate_subscription(user.id, subscription_id)
+    print(invoice.id)
     return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
