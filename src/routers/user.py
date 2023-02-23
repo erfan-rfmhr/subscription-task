@@ -1,5 +1,7 @@
 from authentication.auth import login_manager
-from database.db_user import add_user, get_user
+from database.db import db_admin
+from database.db_user import add_user, get_user, get_user_invoices
+from database.models import Customer, Subscription, Invoice
 from fastapi import APIRouter, Request, Form, status, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -46,4 +48,18 @@ async def login(request: Request, username: str = Form(...), password: str = For
 
 @router.get("/account", response_class=HTMLResponse)
 async def account(request: Request, user=Depends(login_manager)):
-    return user_templates.TemplateResponse("account.html", {"request": request, "user": user})
+    # find all invoices for this user
+    user_invoices = await get_user_invoices(user.id)
+    active_subscriptions = []
+    deactivated_subscriptions = []
+    for invoice in user_invoices:
+        if invoice.is_active:
+            active_subscriptions.append(invoice.subscription_id)
+        else:
+            deactivated_subscriptions.append(invoice.subscription_id)
+    print(user.username)
+    print(active_subscriptions)
+    print(deactivated_subscriptions)
+    return user_templates.TemplateResponse("account.html", {"request": request, "user": user,
+                                                            "active_subscriptions": active_subscriptions,
+                                                            "deactivated_subscriptions": deactivated_subscriptions})
