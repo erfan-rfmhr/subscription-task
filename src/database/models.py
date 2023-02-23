@@ -1,22 +1,20 @@
 from datetime import datetime
 
+from database.db import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DATETIME
 from sqlalchemy.orm import relationship
-
-from src.database.db import Base
 
 
 class Customer(Base):
     __tablename__ = 'customers'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     username = Column(String, unique=True, index=True)
-    email = Column(String, unique=True, index=True)
     credit = Column(Integer, default=0)
     password = Column(String)
     subscriptions = relationship('Subscription', back_populates='owners', secondary='invoices')
 
     def __repr__(self):
-        return f'Customer(id={self.id}, username={self.username}, email={self.email}), credit={self.credit}'
+        return f'Customer(id={self.id}, username={self.username}, credit={self.credit})'
 
 
 class Subscription(Base):
