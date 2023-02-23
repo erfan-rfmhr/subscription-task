@@ -94,4 +94,5 @@ async def deactivate(request: Request, user=Depends(login_manager), subscription
     invoice = None
     if await user_has_already_bought_this_subscription(user.id, subscription_id):
         invoice = await deactivate_subscription(user.id, subscription_id)
+    scheduler.remove_job(f'{invoice.id}')
     return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
