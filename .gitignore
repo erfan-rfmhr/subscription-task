@@ -1,5 +1,8 @@
 # sqlite database
-#*.db
+*.db
+
+# images
+*.jpg
 
 # vscode
 .vscode/*
