@@ -2,6 +2,8 @@ from authentication.auth import login_manager
 from database.db_invoice import get_user_invoices, user_has_already_bought_this_subscription, buy_subscription, \
     activate_subscription, deactivate_subscription
 from database.db_user import add_user, get_user
+from database.db_subscription import get_subscription_price
+from task_managment.task_scheduler import interval_decrease_credit, scheduler
 from fastapi import APIRouter, Request, Form, status, Depends, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -81,6 +83,9 @@ async def activate(request: Request, user=Depends(login_manager), subscription_i
     invoice = None
     if await user_has_already_bought_this_subscription(user.id, subscription_id):
         invoice = await activate_subscription(user.id, subscription_id)
+    price = await get_subscription_price(subscription_id)
+    scheduler.add_job(interval_decrease_credit, 'interval', seconds=3, args=[user.id, price],
+                      id=f'{invoice.id}')
     return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
 
 
@@ -89,5 +94,4 @@ async def deactivate(request: Request, user=Depends(login_manager), subscription
     invoice = None
     if await user_has_already_bought_this_subscription(user.id, subscription_id):
         invoice = await deactivate_subscription(user.id, subscription_id)
-    print(invoice.id)
     return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
