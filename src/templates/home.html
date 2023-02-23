@@ -12,10 +12,9 @@
 				<div class="col-md-6 text-center">
 					<img src="{{ url_for('statics', path='cloud.jpg') }}" alt="Image" class="img-fluid img-resize">
 				</div>
-	<!--			TODO: fix button onclick and link href-->
 				<div class="col-md-6 text-center">
 					<button class="btn btn-primary mt-3" onclick="window.location.href='http://localhost:8000/user/signup'">sign up</button>
-					<p><a href="#" class="link-primary mt-3">Already have an account? sign in</a></p>
+					<p><a href="http://localhost:8000/user/login" class="link-primary mt-3" methods="GET">Already have an account? sign in</a></p>
 				</div>
 			</div>
 		</div>
