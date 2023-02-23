@@ -28,7 +28,15 @@
             <div class="card-body">
               <h5 class="card-title">Product 1</h5>
               <p class="card-text">$10</p>
-              <a href="#" class="btn btn-primary">Buy</a>
+              {% if 1 in active_subscriptions %}
+                <a href="#" class="btn btn-success disabled">activate</a>
+                <a href="#" class="btn btn-danger">deactivate</a>
+              {% elif 1 in deactivated_subscriptions %}
+                <a href="#" class="btn btn-success">activate</a>
+                <a href="#" class="btn btn-danger disabled">deactivate</a>
+              {% else %}
+                <a href="#" class="btn btn-primary">Buy</a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -38,7 +46,15 @@
             <div class="card-body">
               <h5 class="card-title">Product 2</h5>
               <p class="card-text">$20</p>
-              <a href="#" class="btn btn-primary">Buy</a>
+              {% if 2 in active_subscriptions %}
+                <a href="#" class="btn btn-success disabled">activate</a>
+                <a href="#" class="btn btn-danger">deactivate</a>
+              {% elif 2 in deactivated_subscriptions %}
+                <a href="#" class="btn btn-success">activate</a>
+                <a href="#" class="btn btn-danger disabled">deactivate</a>
+              {% else %}
+                <a href="#" class="btn btn-primary">Buy</a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -48,7 +64,15 @@
             <div class="card-body">
               <h5 class="card-title">Product 3</h5>
               <p class="card-text">$30</p>
-              <a href="#" class="btn btn-primary">Buy</a>
+              {% if 3 in active_subscriptions %}
+                <a href="#" class="btn btn-success disabled">activate</a>
+                <a href="#" class="btn btn-danger">deactivate</a>
+              {% elif 3 in deactivated_subscriptions %}
+                <a href="#" class="btn btn-success">activate</a>
+                <a href="#" class="btn btn-danger disabled">deactivate</a>
+              {% else %}
+                <a href="#" class="btn btn-primary">Buy</a>
+              {% endif %}
             </div>
           </div>
         </div>
