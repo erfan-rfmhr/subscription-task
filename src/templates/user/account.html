@@ -10,15 +10,11 @@
 <div class="container">
     <!--      logout button-->
     <div class="row">
-        <div class="col">
-            <a href="/user/logout" class="btn btn-danger">Logout</a>
-        </div>
         <div class="row">
             <div class="col">
+                <a href="/user/logout" class="btn btn-danger">Logout</a>
                 <h5>Username:</h5>
                 <p>{{ user.username }}</p>
-            </div>
-            <div class="col">
                 <h5>Credit:</h5>
                 <p>{{ user.credit }}</p>
             </div>
@@ -30,10 +26,10 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-                    <!-- PRODUCT 1 -->
+                    <!-- Subscription 1 -->
                     <div class="card-body">
-                        <h5 class="card-title">Product 1</h5>
-                        <p class="card-text">$10</p>
+                        <h5 class="card-title">Subscription 1</h5>
+                        <p class="card-text">$10 per 10 minutes</p>
                         {% if 1 in active_subscriptions %}
                         <a href="#" class="btn btn-success disabled">activate</a>
                         <a href="http://localhost:8000/user/deactivate?subscription_id=1" class="btn btn-danger">deactivate</a>
@@ -46,16 +42,16 @@
                            methods="get">Buy</a>
                         {% endif %}
                     </div>
-                    <!-- END PRODUCT 1 -->
+                    <!-- END Subscription 1 -->
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-                    <!-- PRODUCT 2 -->
+                    <!-- Subscription 2 -->
                     <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <p class="card-text">$20</p>
+                        <h5 class="card-title">Subscription 2</h5>
+                        <p class="card-text">$20 per 10 minutes</p>
                         {% if 2 in active_subscriptions %}
                         <a href="#" class="btn btn-success disabled">activate</a>
                         <a href="http://localhost:8000/user/deactivate?subscription_id=2" class="btn btn-danger">deactivate</a>
@@ -67,16 +63,16 @@
                         <a href="http://localhost:8000/user/buy?subscription_id=2" class="btn btn-primary">Buy</a>
                         {% endif %}
                     </div>
-                    <!-- END PRODUCT 2 -->
+                    <!-- END Subscription 2 -->
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-                    <!-- PRODUCT 3 -->
+                    <!-- Subscription 3 -->
                     <div class="card-body">
-                        <h5 class="card-title">Product 3</h5>
-                        <p class="card-text">$30</p>
+                        <h5 class="card-title">Subscription 3</h5>
+                        <p class="card-text">$30 per 10 minutes</p>
                         {% if 3 in active_subscriptions %}
                         <a href="#" class="btn btn-success disabled">activate</a>
                         <a href="http://localhost:8000/user/deactivate?subscription_id=3" class="btn btn-danger">deactivate</a>
@@ -88,7 +84,7 @@
                         <a href="http://localhost:8000/user/buy?subscription_id=3" class="btn btn-primary">Buy</a>
                         {% endif %}
                     </div>
-                    <!-- END PRODUCT 3 -->
+                    <!-- END Subscription 3 -->
                 </div>
             </div>
         </div>
