@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
+from fastapi.middleware.cors import CORSMiddleware
 from database.db import Base, db_admin, engine
 from database.db_subscription import create_subscriptions
 from routers import user
@@ -13,6 +13,15 @@ from routers import user
 app = FastAPI()
 
 app.include_router(user.router)
+
+# Add the CORS middleware to your FastAPI application
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 jinja_templates = Jinja2Templates(directory="templates")
