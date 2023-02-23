@@ -1,8 +1,9 @@
 from authentication.auth import login_manager
 from database.db import db_admin
-from database.db_user import add_user, get_user, get_user_invoices
+from database.db_user import add_user, get_user, get_user_invoices, user_has_already_bought_this_subscription, \
+    buy_subscription
 from database.models import Customer, Subscription, Invoice
-from fastapi import APIRouter, Request, Form, status, Depends
+from fastapi import APIRouter, Request, Form, status, Depends, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
@@ -67,3 +68,10 @@ async def account(request: Request, user=Depends(login_manager)):
     return user_templates.TemplateResponse("account.html", {"request": request, "user": user,
                                                             "active_subscriptions": active_subscriptions,
                                                             "deactivated_subscriptions": deactivated_subscriptions})
+
+
+@router.get('/buy')
+async def buy(request: Request, user=Depends(login_manager), subscription_id: int = Query(...)):
+    if not await user_has_already_bought_this_subscription(user.id, subscription_id):
+        await buy_subscription(user.id, subscription_id)
+    return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
