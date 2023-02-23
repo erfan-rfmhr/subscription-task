@@ -14,8 +14,8 @@ async def signup(request: Request):
 
 
 @router.post("/signup")
-async def signup(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
-    await add_user(username, email, password)
+async def signup(request: Request, username: str = Form(...), password: str = Form(...)):
+    await add_user(username, password)
     access_token = login_manager.create_access_token(
         data={"sub": username}
     )
