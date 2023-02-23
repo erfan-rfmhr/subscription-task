@@ -3,8 +3,8 @@ from database.models import Customer
 from authentication.auth import login_manager
 
 
-async def add_user(username, email, password):
-    user = Customer(username=username, email=email, password=password)
+async def add_user(username, password):
+    user = Customer(username=username, password=password)
     db_admin.db.add(user)
     await db_admin.db.commit()
     await db_admin.db.refresh(user)
