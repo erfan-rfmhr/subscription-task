@@ -26,5 +26,4 @@ async def signup(request: Request, username: str = Form(...), email: str = Form(
 
 @router.get("/account", response_class=HTMLResponse)
 async def account(request: Request, user=Depends(login_manager)):
-    print(user.username)
-    # return user_templates.TemplateResponse("account.html", {"request": request, "user": user})
+    return user_templates.TemplateResponse("account.html", {"request": request, "user": user})
