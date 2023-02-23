@@ -46,6 +46,13 @@ async def login(request: Request, username: str = Form(...), password: str = For
     return response
 
 
+@router.get("/logout")
+async def logout(request: Request):
+    response = RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+    login_manager.set_cookie(response=response, token="")
+    return response
+
+
 @router.get("/account", response_class=HTMLResponse)
 async def account(request: Request, user=Depends(login_manager)):
     # find all invoices for this user
@@ -57,9 +64,6 @@ async def account(request: Request, user=Depends(login_manager)):
             active_subscriptions.append(invoice.subscription_id)
         else:
             deactivated_subscriptions.append(invoice.subscription_id)
-    print(user.username)
-    print(active_subscriptions)
-    print(deactivated_subscriptions)
     return user_templates.TemplateResponse("account.html", {"request": request, "user": user,
                                                             "active_subscriptions": active_subscriptions,
                                                             "deactivated_subscriptions": deactivated_subscriptions})
