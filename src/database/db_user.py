@@ -21,3 +21,10 @@ async def get_user(username: str):
     cursor = await db_admin.db.async_execute(statement="SELECT * FROM customers WHERE username = :username",
                                              params={"username": username})
     return cursor.fetchone()
+
+
+async def get_user_invoices(user_id: int):
+    cursor = await db_admin.db.async_execute(
+        statement="SELECT subscription_id, is_active FROM invoices WHERE customer_id = :user_id",
+        params={"user_id": user_id})
+    return cursor.fetchall()
