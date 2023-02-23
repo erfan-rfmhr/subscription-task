@@ -1,8 +1,7 @@
 from authentication.auth import login_manager
-from database.db import db_admin
-from database.db_user import add_user, get_user, get_user_invoices, user_has_already_bought_this_subscription, \
-    buy_subscription, activate_subscription, deactivate_subscription
-from database.models import Customer, Subscription, Invoice
+from database.db_invoice import get_user_invoices, user_has_already_bought_this_subscription, buy_subscription, \
+    activate_subscription, deactivate_subscription
+from database.db_user import add_user, get_user
 from fastapi import APIRouter, Request, Form, status, Depends, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
