@@ -55,6 +55,11 @@ async def home_page(request: Request):
 async def unauthorized_exception_handler(request: Request, exc: Exception):
     return jinja_templates.TemplateResponse("errors/401.html", {"request": request})
 
+# 404 error handler
+@app.exception_handler(404)
+async def not_found_exception_handler(request: Request, exc: Exception):
+    return jinja_templates.TemplateResponse("errors/404.html", {"request": request})
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
