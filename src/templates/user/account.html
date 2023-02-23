@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  </head>
-  <body class="d-flex justify-content-center align-items-center">
-    <div class="container">
-<!--      logout button-->
+</head>
+<body class="d-flex justify-content-center align-items-center">
+<div class="container">
+    <!--      logout button-->
+    <div class="row">
+        <div class="col">
+            <a href="/user/logout" class="btn btn-danger">Logout</a>
+        </div>
         <div class="row">
             <div class="col">
-            <a href="/user/logout" class="btn btn-danger">Logout</a>
+                <h5>Username:</h5>
+                <p>{{ user.username }}</p>
             </div>
-      <div class="row">
-        <div class="col">
-          <h5>Username:</h5>
-          <p>{{ user.username }}</p>
+            <div class="col">
+                <h5>Credit:</h5>
+                <p>{{ user.credit }}</p>
+            </div>
         </div>
-        <div class="col">
-          <h5>Credit:</h5>
-          <p>{{ user.credit }}</p>
-        </div>
-      </div>
     </div>
 
     <div class="container">
-      <div class="row mt-5">
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Product 1</h5>
-              <p class="card-text">$10</p>
-              {% if 1 in active_subscriptions %}
-                <a href="#" class="btn btn-success disabled">activate</a>
-                <a href="#" class="btn btn-danger">deactivate</a>
-              {% elif 1 in deactivated_subscriptions %}
-                <a href="#" class="btn btn-success">activate</a>
-                <a href="#" class="btn btn-danger disabled">deactivate</a>
-              {% else %}
-                <a href="#" class="btn btn-primary">Buy</a>
-              {% endif %}
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 1</h5>
+                        <p class="card-text">$10</p>
+                        {% if 1 in active_subscriptions %}
+                        <a href="#" class="btn btn-success disabled">activate</a>
+                        <a href="#" class="btn btn-danger">deactivate</a>
+                        {% elif 1 in deactivated_subscriptions %}
+                        <a href="#" class="btn btn-success">activate</a>
+                        <a href="#" class="btn btn-danger disabled">deactivate</a>
+                        {% else %}
+                        <a href="http://localhost:8000/user/buy?subscription_id=1" class="btn btn-primary"
+                           methods="get">Buy</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Product 2</h5>
-              <p class="card-text">$20</p>
-              {% if 2 in active_subscriptions %}
-                <a href="#" class="btn btn-success disabled">activate</a>
-                <a href="#" class="btn btn-danger">deactivate</a>
-              {% elif 2 in deactivated_subscriptions %}
-                <a href="#" class="btn btn-success">activate</a>
-                <a href="#" class="btn btn-danger disabled">deactivate</a>
-              {% else %}
-                <a href="#" class="btn btn-primary">Buy</a>
-              {% endif %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">$20</p>
+                        {% if 2 in active_subscriptions %}
+                        <a href="#" class="btn btn-success disabled">activate</a>
+                        <a href="#" class="btn btn-danger">deactivate</a>
+                        {% elif 2 in deactivated_subscriptions %}
+                        <a href="#" class="btn btn-success">activate</a>
+                        <a href="#" class="btn btn-danger disabled">deactivate</a>
+                        {% else %}
+                        <a href="http://localhost:8000/user/buy?subscription_id=2" class="btn btn-primary">Buy</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Product 3</h5>
-              <p class="card-text">$30</p>
-              {% if 3 in active_subscriptions %}
-                <a href="#" class="btn btn-success disabled">activate</a>
-                <a href="#" class="btn btn-danger">deactivate</a>
-              {% elif 3 in deactivated_subscriptions %}
-                <a href="#" class="btn btn-success">activate</a>
-                <a href="#" class="btn btn-danger disabled">deactivate</a>
-              {% else %}
-                <a href="#" class="btn btn-primary">Buy</a>
-              {% endif %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 3</h5>
+                        <p class="card-text">$30</p>
+                        {% if 3 in active_subscriptions %}
+                        <a href="#" class="btn btn-success disabled">activate</a>
+                        <a href="#" class="btn btn-danger">deactivate</a>
+                        {% elif 3 in deactivated_subscriptions %}
+                        <a href="#" class="btn btn-success">activate</a>
+                        <a href="#" class="btn btn-danger disabled">deactivate</a>
+                        {% else %}
+                        <a href="http://localhost:8000/user/buy?subscription_id=3" class="btn btn-primary">Buy</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>
