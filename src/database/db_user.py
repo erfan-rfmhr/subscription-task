@@ -15,3 +15,9 @@ async def get_user_by_username(username):
     cursor = await db_admin.db.async_execute(statement="SELECT * FROM customers WHERE username = :username",
                                              params={"username": username})
     return cursor.fetchone()
+
+
+async def get_user(username: str):
+    cursor = await db_admin.db.async_execute(statement="SELECT * FROM customers WHERE username = :username",
+                                             params={"username": username})
+    return cursor.fetchone()
