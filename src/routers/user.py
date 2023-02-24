@@ -84,7 +84,7 @@ async def activate(request: Request, user=Depends(login_manager), subscription_i
     if await user_has_already_bought_this_subscription(user.id, subscription_id):
         invoice = await activate_subscription(user.id, subscription_id)
     price = await get_subscription_price(subscription_id)
-    scheduler.add_job(interval_decrease_credit, 'interval', seconds=3, args=[user.id, price],
+    scheduler.add_job(interval_decrease_credit, 'interval', minutes=10, args=[user.id, price],
                       id=f'{invoice.id}')
     return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
 
