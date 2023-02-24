@@ -53,3 +53,15 @@ async def deactivate_subscription(user_id: int, subscription_id: int):
     invoice = cursor.fetchone()
     await db_admin.db.commit()
     return invoice
+
+
+async def terminate_subscription(user_id: int, subscription_id: int):
+    cursor = await db_admin.db.async_execute(
+        statement="SELECT * FROM invoices WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+    invoice = cursor.fetchone()
+    # terminate invoice
+    cursor = await db_admin.db.async_execute(
+        statement="DELETE FROM invoices WHERE customer_id = :user_id AND subscription_id = :subscription_id",
+        params={"user_id": user_id, "subscription_id": subscription_id})
+    return invoice
