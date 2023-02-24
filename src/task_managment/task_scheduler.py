@@ -10,7 +10,6 @@ async def interval_decrease_credit(user_id: int, cost: int):
     cursor = await db_admin.db.async_execute(statement="SELECT credit FROM customers WHERE id = :user_id",
                                              params={"user_id": user_id})
     credit = cursor.fetchone()[0]
-    print(f"credit: {credit}")
     # decrease credit
     await db_admin.db.async_execute(
         statement="UPDATE customers SET credit = :credit WHERE id = :user_id",
