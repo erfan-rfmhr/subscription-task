@@ -8,16 +8,17 @@
 </head>
 <body class="d-flex justify-content-center align-items-center">
 <div class="container">
-    <!-- logout button -->
     <div class="row">
         <div class="row">
             <div class="col">
+            <!-- logout button -->
                 <a href="/user/logout" class="btn btn-danger mb-4 mt-4">Logout</a>
                 <h5>Username:</h5>
                 <p>{{ user.username }}</p>
                 <h5>Credit:</h5>
                 <p>{{ user.credit }}</p>
-                <a href="http://localhost:8000/user/invoices" class="btn btn-primary">My Invoices</a>
+            <!-- My Invoices -->
+                <a href="http://localhost:8000/user/invoices" class="btn btn-primary mb-3">My Invoices</a>
             </div>
         </div>
     </div>
@@ -25,6 +26,13 @@
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-4 mb-4">
+                {%  if 1 in active_subscriptions %}
+                <p>status: running</p>
+                {% elif 1 in deactivated_subscriptions %}
+                <p>status: deactivated</p>
+                {% else %}
+                <p>status: not subscribed</p>
+                {% endif %}
                 <div class="card">
                     <img class="card-img-top" src="{{ url_for('statics', path='cloud.jpg') }}" alt="Card image cap">
                     <!-- Subscription 1 -->
@@ -49,6 +57,13 @@
                 </div>
             </div>
             <div class="col-md-4 mb-4">
+                {%  if 2 in active_subscriptions %}
+                <p>status: running</p>
+                {% elif 2 in deactivated_subscriptions %}
+                <p>status: deactivated</p>
+                {% else %}
+                <p>status: not subscribed</p>
+                {% endif %}
                 <div class="card">
                     <img class="card-img-top" src="{{ url_for('statics', path='cloud.jpg') }}" alt="Card image cap">
                     <!-- Subscription 2 -->
@@ -72,6 +87,14 @@
                 </div>
             </div>
             <div class="col-md-4 mb-4">
+                {%  if 3 in active_subscriptions %}
+                <p>status: running</p>
+                {% elif 3 in deactivated_subscriptions %}
+                <p>status: deactivated</p>
+                {% else %}
+                <p>status: not subscribed</p>
+                {% endif %}
+
                 <div class="card">
                     <img class="card-img-top" src="{{ url_for('statics', path='cloud.jpg') }}" alt="Card image cap">
                     <!-- Subscription 3 -->
