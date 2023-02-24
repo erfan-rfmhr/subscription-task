@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Invoices</title>
+    <!-- Load Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4 mb-3">Invoice table</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Invoice Id</th>
+            <th>Status</th>
+            <th>Subscription name</th>
+            <th>Subscription price</th>
+            <th>Interval</th>
+            <th>Start date</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for invoice in info %}
+          <tr>
+            <td>{{ invoice[0] }}</td>
+            <td>{{ invoice[1] }}</td>
+            <td>{{ invoice[2] }}</td>
+            <td>{{ invoice[3] }}</td>
+            <td>{{ invoice[4] }}</td>
+            <td>{{ invoice[5] }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- Load Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
