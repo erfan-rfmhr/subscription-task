@@ -8,21 +8,22 @@
 </head>
 <body class="d-flex justify-content-center align-items-center">
 <div class="container">
-    <!--      logout button-->
+    <!-- logout button -->
     <div class="row">
         <div class="row">
             <div class="col">
-                <a href="/user/logout" class="btn btn-danger">Logout</a>
+                <a href="/user/logout" class="btn btn-danger mb-4 mt-4">Logout</a>
                 <h5>Username:</h5>
                 <p>{{ user.username }}</p>
                 <h5>Credit:</h5>
                 <p>{{ user.credit }}</p>
+                <a href="http://localhost:8000/user/invoices" class="btn btn-primary">My Invoices</a>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
