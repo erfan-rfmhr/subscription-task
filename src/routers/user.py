@@ -2,7 +2,7 @@ from authentication.auth import login_manager
 from database.db_invoice import get_user_invoices, user_has_already_bought_this_subscription, buy_subscription, \
     activate_subscription, deactivate_subscription
 from database.db_user import add_user, get_user
-from database.db_subscription import get_subscription_price
+from database.db_subscription import get_subscription_price, get_subscription_name
 from task_managment.task_scheduler import interval_decrease_credit, scheduler
 from fastapi import APIRouter, Request, Form, status, Depends, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -96,3 +96,15 @@ async def deactivate(request: Request, user=Depends(login_manager), subscription
         invoice = await deactivate_subscription(user.id, subscription_id)
     scheduler.remove_job(f'{invoice.id}')
     return RedirectResponse(url="/user/account", status_code=status.HTTP_302_FOUND)
+
+
+@router.get('/invoices', response_class=HTMLResponse)
+async def invoices(request: Request, user=Depends(login_manager)):
+    user_invoices = await get_user_invoices(user.id)
+    info = []
+    for invoice in user_invoices:
+        subscription_name = await get_subscription_name(invoice.subscription_id)
+        subscription_price = await get_subscription_price(invoice.subscription_id)
+        info.append((invoice.id, "active" if invoice.is_active else "deactivated", subscription_name, subscription_price,
+                     "10 min", invoice.start_date))
+    return user_templates.TemplateResponse("invoices.html", {"request": request, "user": user, "info": info})
