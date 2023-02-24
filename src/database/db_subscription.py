@@ -20,3 +20,10 @@ async def get_subscription_price(subscription_id: int):
         statement="SELECT price FROM subscriptions WHERE id = :subscription_id",
         params={"subscription_id": subscription_id})
     return cursor.fetchone()[0]
+
+
+async def get_subscription_name(subscription_id: int):
+    cursor = await db_admin.db.execute(
+        statement="SELECT name FROM subscriptions WHERE id = :subscription_id",
+        params={"subscription_id": subscription_id})
+    return cursor.fetchone()[0]
